@@ -7,7 +7,7 @@
       </el-form-item>
       
       <el-form-item label="房产面积" :label-width="labelWidth">
-        <el-input type="textarea" v-model="form.houseArea"></el-input>
+        <el-input v-model="form.houseArea"></el-input>
       </el-form-item>
 
       <el-form-item label="房屋地址" :label-width="labelWidth">
@@ -139,5 +139,8 @@
     color: #3F3F3F;
     text-align: center;
     margin-bottom: 40px;
+  }
+  .el-form-item {
+    margin-bottom: 13px;
   }
 </style>

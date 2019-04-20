@@ -182,7 +182,7 @@ $light_gray:#eee;
     width: 520px;
     max-width: 100%;
     padding: 35px 35px 15px 35px;
-    margin: 10px auto 0;
+    margin: 0 auto 0;
   }
   .tips {
     font-size: 14px;
@@ -205,7 +205,7 @@ $light_gray:#eee;
     font-size: 26px;
     font-weight: 400;
     color: $light_gray;
-    margin: 0px auto 40px auto;
+    margin: 0px auto 20px auto;
     text-align: center;
     font-weight: bold;
   }
@@ -222,7 +222,7 @@ $light_gray:#eee;
     width: 100%;
   }
   .el-form-item {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 }
 </style>

@@ -42,7 +42,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="price"
+        label="房产租金"
         width="150">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.housePrice }}</span>

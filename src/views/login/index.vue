@@ -1,12 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="off" label-position="left">
       <h3 class="title">房屋中介管理系统</h3>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="输入用户名" />
+        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="off" placeholder="输入用户名" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
