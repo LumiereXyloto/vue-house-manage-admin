@@ -9,7 +9,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {
+        target: 'http://172.22.1.246:8081',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -57,7 +65,7 @@ module.exports = {
      * then assetsPublicPath should be set to "/bar/".
      * In most cases please use '/' !!!
      */
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

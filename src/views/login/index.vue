@@ -71,13 +71,19 @@ export default {
       }
       if (this.loginForm.username && this.loginForm.password) {
         this.loading = true
-        this.axios.post('/user/login', {
+        console.log(this.loginForm)
+        this.axios.post('/api/user/login', {
           userName: this.loginForm.username,
           password: this.loginForm.password
+        }, {
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+          }
         })
           .then((res) => {
-            console.log(res)
             if (res.data.status === 200) {
+              sessionStorage.setItem('userId', res.data.data)
+              sessionStorage.setItem('password', this.loginForm.password)
               this.$message({
                 message: '登陆成功',
                 type: 'success'
@@ -85,12 +91,11 @@ export default {
               this.loading = false
               this.$router.replace('/dashboard')
             } else {
-              this.$message.error('登录失败')
+              this.$message.error(res.data.message)
               this.loading = false
             }
           })
       }
-      console.log(this.loginForm.username, this.loginForm.password)
     }
   }
 }

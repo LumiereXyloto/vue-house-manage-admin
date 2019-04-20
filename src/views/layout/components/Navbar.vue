@@ -4,11 +4,11 @@
     <breadcrumb />
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+        <img src="@/assets/images/good.png" class="user-avatar">
         <i class="el-icon-caret-bottom"/>
       </div>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link class="inlineBlock" to="/">
+        <router-link class="inlineBlock" to="/dashboard">
           <el-dropdown-item>
             Home
           </el-dropdown-item>
@@ -33,16 +33,33 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'sidebar',
-      'avatar'
+      'sidebar'
     ])
   },
+  // data () {
+  //   return {
+  //     avatar: '/@/assets/images/good.png'
+  //   }
+  // },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },
     logout() {
-      this.$router.replace('/login')
+      this.axios.post('/api/user/unLogin')
+        .then((res) => {
+          if (res.data.status === 200) {
+            sessionStorage.removeItem('userId')
+            sessionStorage.removeItem('password')
+            this.$router.replace('/login')
+            this.$message({
+              message: '注销成功',
+              type: 'success'
+            })
+          } else {
+            console.log(res.data.message)
+          }
+        })
     }
   }
 }

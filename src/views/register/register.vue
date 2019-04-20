@@ -55,7 +55,8 @@
 </template>
 
 <script>
-
+import axios from 'axios'
+import qs from 'qs'
 export default {
   data() {
     return {
@@ -87,25 +88,39 @@ export default {
     handleRegister() {
       if (this.form.userName && this.form.password && this.form.sex && this.form.idNumber && this.form.education && this.form.job && this.form.birthDate && this.form.phoneNumber && this.form.homeAddress &&this.form.email) {
         this.loading = true
-        console.log(this.form)
-        // this.axios.post('/user/login', {
-        //   userName: this.loginForm.username,
-        //   password: this.loginForm.password
-        // })
-        //   .then((res) => {
-        //     console.log(res)
-        //     if (res.data.status === 200) {
-        //       this.$message({
-        //         message: '登陆成功',
-        //         type: 'success'
-        //       });
-        //       this.loading = false
-        //       this.$router.replace('/dashboard')
-        //     } else {
-        //       this.$message.error('登录失败')
-        //       this.loading = false
-        //     }
-        //   })
+        this.axios.post('/api/user/register', {
+          userName: this.form.userName,
+          password: this.form.password,
+          sex: this.form.sex,
+          idNumber: this.form.idNumber,
+          education: this.form.education,
+          job: this.form.job,
+          birthDate: this.form.birthDate,
+          phoneNumber: this.form.phoneNumber,
+          homeAddress: this.form.homeAddress,
+          email: this.form.email,
+          realName: this.form.realName
+        }, {
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+          }
+        })
+          .then((res) => {
+            console.log(res)
+            if (res.data.status === 200) {
+              this.$message({
+                message: '注册成功',
+                type: 'success'
+              });
+              this.loading = false
+              sessionStorage.setItem('userId', res.data.data.userId)
+              sessionStorage.setItem('password', res.data.data.password)
+              this.$router.replace('/dashboard')
+            } else {
+              this.$message.error(res.data.message)
+              this.loading = false
+            }
+          })
       } else {
         this.$message({
           message: '请先完善个人信息！',

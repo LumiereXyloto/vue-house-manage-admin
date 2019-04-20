@@ -50,16 +50,22 @@ export const constantRouterMap = [
     meta: { title: '个人信息'},
     children: [
       {
-        path: 'add-userinfo',
-        name: 'AddUserinfo',
-        component: () => import('@/views/user/add-userinfo'),
-        meta: { title: '新增个人信息'}
+        path: 'check-userinfo',
+        name: 'CheckUserinfo',
+        component: () => import('@/views/user/check-userInfo'),
+        meta: { title: '查看个人信息'}
       },
       {
         path: 'change-userinfo',
         name: 'ChangeUserinfo',
         component: () => import('@/views/user/change-userinfo'),
         meta: { title: '修改个人信息'}
+      },
+      {
+        path: 'change-password',
+        name: 'ChangePassword',
+        component: () => import('@/views/user/password'),
+        meta: { title: '修改密码'}
       }
     ]
   },
@@ -71,10 +77,10 @@ export const constantRouterMap = [
     meta: { title: '出租管理'},
     children: [
       {
-        path: 'rentout-userinfo',
-        name: 'RentoutUserinfo',
-        component: () => import('@/views/rentout/rentout-userinfo'),
-        meta: { title: '出租人信息管理'}
+        path: 'add-rentout',
+        name: 'AddRentout',
+        component: () => import('@/views/rentout/add-rentout'),
+        meta: { title: '新增出租记录'}
       },
       {
         path: 'rentout-resource',
@@ -92,22 +98,16 @@ export const constantRouterMap = [
     meta: { title: '求租管理'},
     children: [
       {
-        path: 'rentin-userinfo',
-        name: 'RentinUserinfo',
-        component: () => import('@/views/rentin/rentin-userinfo'),
-        meta: { title: '求租人信息管理'}
+        path: 'add-rentin',
+        name: 'AddRentin',
+        component: () => import('@/views/rentin/add-rentin'),
+        meta: { title: '新增求租记录'}
       },
       {
         path: 'rentin-resource',
         name: 'RentinResource',
         component: () => import('@/views/rentin/rentin-resource'),
-        meta: { title: '房源查询'}
-      },
-      {
-        path: 'rentin-prefer',
-        name: 'RentinPrefer',
-        component: () => import('@/views/rentin/rentin-prefer'),
-        meta: { title: '求租意向设置'}
+        meta: { title: '求租信息管理'}
       }
     ]
   },
@@ -161,22 +161,10 @@ export const constantRouterMap = [
     meta: { title: '系统管理' },
     children: [
       {
-        path: 'password',
-        name: 'Password',
-        component: () => import('@/views/system/password'),
-        meta: { title: '修改密码' }
-      },
-      {
         path: 'data',
         name: 'Data',
         component: () => import('@/views/system/data'),
         meta: { title: '格式化数据' }
-      },
-      {
-        path: 'authority-manage',
-        name: 'AuthorityManage',
-        component: () => import('@/views/system/authority-manage'),
-        meta: { title: '权限管理' }
       }
     ]
   }

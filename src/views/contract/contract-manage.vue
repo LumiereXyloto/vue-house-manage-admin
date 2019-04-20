@@ -10,12 +10,12 @@
         width="250">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.createTime }}</span>
+          <span style="margin-left: 10px">{{ scope.row.createTime.substring(0,10) }}</span>
         </template>
       </el-table-column>
       <el-table-column
         label="合同标题"
-        width="350">
+        width="300">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
             <p>合同详情: {{ scope.row.contractInfo }}</p>
@@ -23,6 +23,20 @@
               <el-tag size="medium">{{ scope.row.title }}</el-tag>
             </div>
           </el-popover>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="出租人"
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.renterName}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="租客"
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.seekerName}}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作">
@@ -38,18 +52,24 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog title="编辑合同" :visible.sync="dialogFormVisible" center>
-      <el-form :model="form">
+    <el-dialog title="编辑合同" :visible.sync="dialogFormVisible" center top="0">
+      <el-form :model="editForm">
         <el-form-item label="合同标题" :label-width="formLabelWidth">
-          <el-input v-model="form.title" auto-complete="off"></el-input>
+          <el-input v-model="editForm.title" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="合同详情" :label-width="formLabelWidth">
-          <el-input v-model="form.contractInfo" auto-complete="off" type="textarea"></el-input>
+          <el-input v-model="editForm.contractInfo" auto-complete="off" type="textarea"></el-input>
+        </el-form-item>
+        <el-form-item label="出租人姓名" :label-width="formLabelWidth">
+          <el-input v-model="editForm.renterName" auto-complete="off" type="textarea"></el-input>
+        </el-form-item>
+        <el-form-item label="租客姓名" :label-width="formLabelWidth">
+          <el-input v-model="editForm.seekerName" auto-complete="off" type="textarea"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="this.confirmEdit">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -62,33 +82,52 @@
       return {
         formLabelWidth: '100px',
         dialogFormVisible: false,
-        form: {
+        tableData: [],
+        editForm: {
+          contractInfo: '详情',
           title: '标题',
-          contractInfo: '详情'
+          renterName: '小王',
+          seekerName: '小邓',
+          contractId: ''
         },
-        tableData: [{
-          createTime: '2019-4-13',
-          title: '住房签约合同',
-          contractInfo: '合同详情'
-        }, {
-          createTime: '2019-4-13',
-          title: '住房签约合同',
-          contractInfo: '合同详情'
-        }, {
-          createTime: '2019-4-13',
-          title: '住房签约合同',
-          contractInfo: '合同详情'
-        }, {
-          createTime: '2019-4-13',
-          title: '住房签约合同',
-          contractInfo: '合同详情'
-        }]
+        userId: sessionStorage.getItem('userId')
       }
     },
     methods: {
       handleEdit(index, row) {
-        console.log(index, row);
+        // console.log(index, row)
         this.dialogFormVisible = true
+        this.editForm.contractId = row.contractId
+      },
+      confirmEdit () {
+        if (this.editForm.contractInfo && this.editForm.title && this.editForm.renterName && this.editForm.seekerName) {
+          this.axios.put('/api/contract/updateContract', {
+            contractId: this.editForm.contractId,
+            title: this.editForm.title,
+            renterName: this.editForm.renterName,
+            seekerName: this.editForm.seekerName,
+            contractInfo: this.editForm.contractInfo,
+            userId: this.userId
+          })
+            .then((res) => {
+              console.log(res)
+              if (res.data.status === 200) {
+                this.getTableData()
+                this.$message({
+                  type: 'success',
+                  message: res.data.message
+                })
+                this.dialogFormVisible = false
+              } else {
+                this.$message.error(res.data.message)
+              }
+            })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: '请先填写完整兼职'
+          })
+        }
       },
       handleDelete(index, row) {
         this.$confirm('此操作将删除该条记录, 是否继续?', '提示', {
@@ -96,26 +135,42 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.tableData.splice(index, 1);
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          this.axios.delete('/api/contract/deleteContract', {
+            params: {
+              contractId: row.contractId
+            }
+          })
+            .then((res) => {
+              if (res.data.status === 200) {
+                this.tableData.splice(index, 1)
+                this.$message({
+                  type: 'success',
+                  message: res.data.message
+                })
+              } else {
+                this.$message.error(res.data.message)
+              }
+            })
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
           });          
         });
-        console.log(index, row);
+        // console.log(index, row);
       },
       getTableData() {
-      this.axios.get('/contract')
-        .then((res) => {
-          if (res.data.status === 200) {
-            this.tableData = res.data.data
+        this.axios.get('api/contract/findContractByUserId', {
+          params: {
+            userId: sessionStorage.getItem('userId')
           }
         })
+          .then((res) => {
+            if (res.data.status === 200) {
+              this.tableData = res.data.data
+            }
+            // console.log(res)
+          })
       }
     },
     mounted() {
