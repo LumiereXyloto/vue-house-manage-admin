@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     getData () {
-      this.axios.get('/api/seek/showSeeks')
+      this.axios.get('/seek/showSeeks')
         .then((res) => {
           // console.log(res.data.data)
           if (res.data.status === 200) {
@@ -102,7 +102,7 @@ export default {
     },
     confirmEdit () {
       if (this.checkValid(this.form)) {
-        this.axios.put('/api/seek/updateSeek', {
+        this.axios.put('/seek/updateSeek', {
           userId: this.form.userId,
           seekerName: this.form.seekerName,
           seekerPhone: this.form.seekerPhone,
@@ -134,7 +134,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.axios.delete('/api/seek/deleteSeek', {
+        this.axios.delete('/seek/deleteSeek', {
           params: {
             seekId: row.seekId
           }

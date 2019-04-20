@@ -48,7 +48,7 @@ export default {
           })
           return false
         } else {
-          this.axios.put('/api/user/update', {
+          this.axios.put('/user/update', {
             password: this.newPassword,
             userId: sessionStorage.getItem('userId')
           })

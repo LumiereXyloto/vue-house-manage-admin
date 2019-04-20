@@ -88,7 +88,7 @@ export default {
     handleRegister() {
       if (this.form.userName && this.form.password && this.form.sex && this.form.idNumber && this.form.education && this.form.job && this.form.birthDate && this.form.phoneNumber && this.form.homeAddress &&this.form.email) {
         this.loading = true
-        this.axios.post('/api/user/register', {
+        this.axios.post('/user/register', {
           userName: this.form.userName,
           password: this.form.password,
           sex: this.form.sex,
@@ -222,7 +222,7 @@ $light_gray:#eee;
     width: 100%;
   }
   .el-form-item {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 }
 </style>

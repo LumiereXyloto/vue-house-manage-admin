@@ -77,7 +77,7 @@
       onSubmit() {
         let flag = this.checkValid(this.form)
         if (flag) {
-          this.axios.post('/api/rent/addRent', {
+          this.axios.post('/rent/addRent', {
             userId: this.form.userId,
             houseAddress: this.form.houseAddress,
             houseArea: parseInt(this.form.houseArea),

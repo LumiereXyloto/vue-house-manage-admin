@@ -44,7 +44,7 @@
       onSubmit() {
         let flag = this.checkValid(this.form)
         if (flag) {
-          this.axios.post('/api/seek/addSeek', {
+          this.axios.post('/seek/addSeek', {
             userId: this.userId,
             seekerName: this.form.seekerName,
             seekerPhone: this.form.seekerPhone,

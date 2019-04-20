@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getData () {
-      this.axios.get('/api/user/getUserById', {
+      this.axios.get('/user/getUserById', {
         params: {
           userId: this.userId
         }

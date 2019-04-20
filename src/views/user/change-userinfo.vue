@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getData () {
-      this.axios.get('/api/user/getUserById', {
+      this.axios.get('/user/getUserById', {
         params: {
           userId: this.userId
         }
@@ -61,7 +61,7 @@ export default {
         })
     },
     update () {
-      this.axios.put('/api/user/update', {
+      this.axios.put('/user/update', {
         userId: this.data.userId,
         birthDate: this.data.birthDate,
         education: this.data.education,

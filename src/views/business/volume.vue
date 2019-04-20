@@ -63,7 +63,7 @@ export default {
       myChart.setOption(option);
     },
     getData () {
-      this.axios.get('/api/business/getTrading', {
+      this.axios.get('/business/getTrading', {
         params: {
           userId: this.userId
         }

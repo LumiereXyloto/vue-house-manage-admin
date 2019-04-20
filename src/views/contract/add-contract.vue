@@ -39,7 +39,7 @@
     methods: {
       onSubmit() {
         if (this.form.title && this.form.contractInfo && this.form.renterName && this.form.seekerName) {
-          this.axios.post('/api/contract/addContract', {
+          this.axios.post('/contract/addContract', {
             userId: this.form.userId,
             title: this.form.title,
             contractInfo: this.form.contractInfo,

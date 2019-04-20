@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     getData () {
-      this.axios.get('/api/rent/showRents')
+      this.axios.get('/rent/showRents')
         .then((res) => {
           // console.log(res.data.data)
           if (res.data.status === 200) {
@@ -169,7 +169,7 @@ export default {
     },
     confirmEdit () {
       if (this.checkValid(this.form)) {
-        this.axios.put('/api/rent/updateRent', {
+        this.axios.put('/rent/updateRent', {
           userId: this.form.userId,
           houseAddress: this.form.houseAddress,
           houseArea: parseInt(this.form.houseArea),
@@ -209,7 +209,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.axios.delete('/api/rent/deleteRent', {
+        this.axios.delete('/rent/deleteRent', {
           params: {
             rentId: row.rentId
           }

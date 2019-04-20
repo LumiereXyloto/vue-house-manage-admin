@@ -101,7 +101,7 @@
       },
       confirmEdit () {
         if (this.editForm.contractInfo && this.editForm.title && this.editForm.renterName && this.editForm.seekerName) {
-          this.axios.put('/api/contract/updateContract', {
+          this.axios.put('/contract/updateContract', {
             contractId: this.editForm.contractId,
             title: this.editForm.title,
             renterName: this.editForm.renterName,
@@ -135,7 +135,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.axios.delete('/api/contract/deleteContract', {
+          this.axios.delete('/contract/deleteContract', {
             params: {
               contractId: row.contractId
             }
@@ -160,7 +160,7 @@
         // console.log(index, row);
       },
       getTableData() {
-        this.axios.get('api/contract/findContractByUserId', {
+        this.axios.get('/contract/findContractByUserId', {
           params: {
             userId: sessionStorage.getItem('userId')
           }

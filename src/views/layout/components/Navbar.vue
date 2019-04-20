@@ -46,7 +46,7 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout() {
-      this.axios.post('/api/user/unLogin')
+      this.axios.post('/user/unLogin')
         .then((res) => {
           if (res.data.status === 200) {
             sessionStorage.removeItem('userId')

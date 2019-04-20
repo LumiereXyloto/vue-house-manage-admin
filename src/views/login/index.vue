@@ -72,7 +72,7 @@ export default {
       if (this.loginForm.username && this.loginForm.password) {
         this.loading = true
         console.log(this.loginForm)
-        this.axios.post('/api/user/login', {
+        this.axios.post('/user/login', {
           userName: this.loginForm.username,
           password: this.loginForm.password
         }, {
