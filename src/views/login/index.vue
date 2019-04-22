@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="off" label-position="left">
-      <h3 class="title">房屋中介管理系统</h3>
+      <h3 class="title">家诚房屋中介管理系统</h3>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -71,7 +71,7 @@ export default {
       }
       if (this.loginForm.username && this.loginForm.password) {
         this.loading = true
-        console.log(this.loginForm)
+        // console.log(this.loginForm)
         this.axios.post('/user/login', {
           userName: this.loginForm.username,
           password: this.loginForm.password

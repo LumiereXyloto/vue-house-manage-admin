@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="form" class="login-form" auto-complete="on" label-position="left">
-      <h3 class="title">房屋中介管理系统用户注册</h3>
+      <h3 class="title">家诚房屋中介管理系统用户注册</h3>
       <el-form-item>
         <el-input v-model="form.userName" type="text" auto-complete="on" placeholder="设置用户名" />
       </el-form-item>
@@ -205,7 +205,7 @@ $light_gray:#eee;
     font-size: 26px;
     font-weight: 400;
     color: $light_gray;
-    margin: 0px auto 20px auto;
+    margin: 0px auto 10px auto;
     text-align: center;
     font-weight: bold;
   }
@@ -222,7 +222,7 @@ $light_gray:#eee;
     width: 100%;
   }
   .el-form-item {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 }
 </style>

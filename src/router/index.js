@@ -31,7 +31,6 @@ export const constantRouterMap = [
     path: '/',
     component: Layout,
     redirect: '/login',
-    name: 'Dashboard',
     meta: { title: '主页'},
     hidden: true,
     children: [{
@@ -137,7 +136,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/business/charge-manage',
     name: 'Business',
-    meta: { title: '业务统计' },
+    meta: { title: '业务管理' },
     children: [
       {
         path: 'volume',
@@ -150,6 +149,12 @@ export const constantRouterMap = [
         name: 'ChargeManage',
         component: () => import('@/views/business/charge-manage'),
         meta: { title: '收费管理' }
+      },
+      {
+        path: 'service',
+        name: 'Service',
+        component: () => import('@/views/business/service'),
+        meta: { title: '售后管理' }
       }
     ]
   },
